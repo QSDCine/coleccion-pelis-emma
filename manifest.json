@@ -1,6 +1,6 @@
 {
-  "name": "Colección de películas de Dan",
-  "short_name": "PelisDan",
+  "name": "Colección de películas de Emma",
+  "short_name": "PelisEmma",
   "description": "Mi colección personal de películas, siempre conmigo.",
   "display": "fullscreen",
   "start_url": "index.html",
