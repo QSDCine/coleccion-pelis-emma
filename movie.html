@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de película</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/movie.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1 id="titulo-pelicula" class="movie-title">Título de la película</h1>
+  </header>
+
+  <main class="movie-container">
+
+    <div class="portada-container">
+      <img id="portada" class="portada" src="/img/x.png" alt="Portada de la película">
+    </div>
+
+    <section class="datos">
+      <p><strong>Año:</strong> <span id="año"></span></p>
+
+      <p><strong>Director/es:</strong> 
+        <span id="director"></span>
+      </p>
+
+      <p><strong>Género:</strong> 
+        <span id="generos"></span>
+      </p>
+
+      <p><strong>Formato:</strong> 
+        <span id="formato"></span>
+      </p>
+
+      <p><strong>Edición especial / coleccionista:</strong> 
+        <span id="edicionEspecial"></span>
+      </p>
+
+      <p><strong>Saga:</strong> 
+        <span id="saga"></span>
+      </p>
+
+      <p><strong>Notas:</strong> 
+        <span id="notas"></span>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <button id="btn-otras-ediciones" class="btn-otras" type="button">
+      Ver otras ediciones de esta película
+    </button>
+<button id="btn-ver-saga"
+        class="btn-otras btn-saga oculto"
+        type="button">
+  Ver saga
+</button>
+  </footer>
+    
+    <!-- BOTONES SECUNDARIOS -->
+<div class="acciones-secundarias">
+  <button id="btn-atras" class="btn-atras">← Volver al catálogo</button>
+  <button id="btn-editar" class="btn-editar">Editar</button>
+  <button id="btn-eliminar" class="btn-eliminar">Eliminar</button>
+</div>
+
+  <script type="module" src="js/movie.js"></script>
+  <script src="js/tema.js"></script>
+</body>
+</html>
+
+
+
+
+
+

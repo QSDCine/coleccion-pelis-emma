@@ -1,0 +1,202 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+header.header {
+  padding: 20px;
+  background: #222;
+  color: #fff;
+  text-align: center;
+}
+
+.catalog-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.contador {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ===========================
+   BUSCADOR
+=========================== */
+
+.busqueda {
+  padding: 15px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+#input-busqueda {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+/* ===========================
+   FILTROS
+=========================== */
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.filtro {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.filtro label {
+  font-size: 0.9rem;
+  margin-bottom: 3px;
+}
+
+.filtro select {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+/* ===========================
+   CATÁLOGO — VISTA LISTA
+=========================== */
+
+.catalogo.vista-lista {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.pelicula-lista {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.pelicula-lista img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.pelicula-lista .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pelicula-lista .titulo {
+  font-weight: bold;
+}
+
+.pelicula-lista .detalle {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* ===========================
+   CATÁLOGO — VISTA CUADRÍCULA
+=========================== */
+
+.catalogo.vista-cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+.pelicula-cuadricula {
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pelicula-cuadricula img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.pelicula-cuadricula .titulo {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.pelicula-cuadricula .detalle {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* ===========================
+   BOTÓN FLOTANTE
+=========================== */
+
+.btn-flotante {
+  position: fixed;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  cursor: grab;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  /* FIXES */
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}
+
+/* BOTONES ADICIONALES HEADER */
+.acciones-header {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn-mini {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--color-acento, #444);
+  color: white;
+  transition: 0.2s;
+}
+
+.btn-mini:hover {
+  opacity: 0.8;
+}

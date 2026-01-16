@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de películas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/catalog.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1 class="catalog-title">Catálogo de películas</h1>
+    <p id="contador-peliculas" class="contador">Total: 0 películas</p>
+    <div class="acciones-header">
+  <button id="btn-volver-index" class="btn-mini">Inicio</button>
+  <button id="btn-reset" class="btn-mini">Reset</button>
+</div>
+  </header>
+
+  <!-- BUSCADOR -->
+  <section id="busqueda" class="busqueda">
+    <input 
+      type="text" 
+      id="input-busqueda" 
+      placeholder="Buscar por título, año, director, género..."
+       autocomplete="off" 
+    >
+  </section>
+
+  <!-- FILTROS -->
+  <section id="filtros" class="filtros">
+    <div class="filtro">
+      <label for="filtro-genero">Género</label>
+      <select id="filtro-genero">
+        <option value="">Todos</option>
+      </select>
+    </div>
+
+    <div class="filtro">
+      <label for="filtro-formato">Formato</label>
+      <select id="filtro-formato">
+        <option value="">Todos</option>
+      </select>
+    </div>
+
+    <div class="filtro">
+      <label for="filtro-director">Director</label>
+      <select id="filtro-director">
+        <option value="">Todos</option>
+      </select>
+    </div>
+
+    <div class="filtro">
+      <label for="filtro-año">Año</label>
+      <select id="filtro-año">
+        <option value="">Todos</option>
+      </select>
+    </div>
+
+    <div class="filtro">
+      <label for="ordenar-por">Ordenar por</label>
+      <select id="ordenar-por">
+        <option value="titulo">Título</option>
+        <option value="año">Año</option>
+        <option value="formato">Formato</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <main id="catalogo" class="catalogo vista-lista">
+    <!-- Aquí se insertarán las películas dinámicamente -->
+  </main>
+
+  <!-- BOTÓN FLOTANTE PARA CAMBIAR VISTA -->
+  <button id="btn-cambiar-vista" class="btn-flotante" type="button">
+    Cambiar vista
+  </button>
+
+  <script type="module" src="js/catalog.js"></script>
+  <script src="js/tema.js"></script>
+</body>
+</html>
+
+
+
+

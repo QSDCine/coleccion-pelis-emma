@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Añadir nueva película</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/add.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1 class="add-title">Añadir nueva película</h1>
+  </header>
+
+  <!-- FORMULARIO -->
+  <main class="form-container">
+    <form id="form-add" enctype="multipart/form-data" autocomplete="off" >
+
+      <!-- TÍTULO -->
+      <div class="campo">
+        <label for="titulo">Título *</label>
+        <input type="text" id="titulo" autocomplete="off" required>
+      </div>
+
+      <!-- AÑO -->
+      <div class="campo">
+        <label for="año">Año *</label>
+        <input type="number" id="año" min="1900" max="2100"  autocomplete="off" required>
+      </div>
+
+      <!-- DIRECTOR -->
+      <div class="campo">
+        <label for="director">Director/es *</label>
+        <input type="text" id="director" placeholder="Separar con comas"  autocomplete="off" required>
+      </div>
+
+      <!-- GÉNEROS -->
+      <div class="campo">
+        <label for="generos">Género/s *</label>
+        <input type="text" id="generos" placeholder="Separar con comas"  autocomplete="off" required>
+      </div>
+
+      <!-- FORMATO -->
+      <div class="campo">
+        <label for="formato">Formato *</label>
+        <select id="formato" required>
+          <option value="">Selecciona formato</option>
+          <option value="DVD">DVD</option>
+          <option value="Blu-Ray">Blu-Ray</option>
+          <option value="4K">4K</option>
+          <option value="Combo (Blu-Ray + 4K)">Combo (Blu-Ray + 4K)</option>
+          <option value="Combo (Blu-Ray + DVD)">Combo (Blu-Ray + DVD)</option>
+        </select>
+      </div>
+
+      <!-- EDICIÓN ESPECIAL -->
+      <div class="campo">
+        <label for="edicionEspecial">Edición especial / coleccionista *</label>
+        <select id="edicionEspecial" required>
+          <option value="">Selecciona</option>
+          <option value="true">Sí</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <!-- SAGA -->
+      <div class="campo">
+        <label for="esParteSaga">¿Pertenece a una saga? *</label>
+        <select id="esParteSaga" required>
+          <option value="">Selecciona</option>
+          <option value="true">Sí</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <!-- CAMPOS DE SAGA (solo si esParteSaga = true) -->
+      <div id="campos-saga" class="grupo-saga" style="display:none;">
+
+        <div class="campo">
+          <label for="nombreSaga">Nombre de la saga *</label>
+          <input type="text" id="nombreSaga" autocomplete="off">
+        </div>
+       
+        <div class="campo">
+          <label for="numeroSaga">Número en la saga *</label>
+          <input type="number" id="numeroSaga" min="1" autocomplete="off" >
+        </div>
+
+        <div class="campo">
+          <label for="totalSaga">Total de películas en la saga *</label>
+          <input type="number" id="totalSaga" min="1" autocomplete="off" >
+        </div>
+
+      </div>
+
+      <!-- NOTAS -->
+      <div class="campo">
+        <label for="notas">Notas *</label>
+        <textarea id="notas" required></textarea>
+      </div>
+
+      <!-- PORTADA -->
+      <div class="campo">
+        <label for="portada">Portada</label>
+        <input type="text" id="portada" placeholder="URL de portada (o deja vacío)"  autocomplete="off" >
+      </div>
+
+      <!-- BOTÓN GUARDAR -->
+      <button type="submit" id="btn-guardar" class="btn-guardar">
+        Guardar película
+      </button>
+
+    </form>
+  </main>
+
+  <script type="module" src="js/add.js"></script>
+  <script src="js/tema.js"></script>
+</body>
+</html>
+
+
+
+
+
+

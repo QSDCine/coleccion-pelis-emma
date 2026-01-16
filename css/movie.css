@@ -1,0 +1,186 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header {
+  background: #222;
+  color: #fff;
+  padding: 20px 15px;
+  text-align: center;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* ===========================
+   CONTENEDOR PRINCIPAL
+=========================== */
+
+.movie-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   PORTADA
+=========================== */
+
+.portada-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.portada {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ===========================
+   DATOS DE LA PELÍCULA
+=========================== */
+
+.datos {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  line-height: 1.6;
+}
+
+.datos p {
+  margin: 10px 0;
+}
+
+.datos strong {
+  color: #333;
+}
+
+/* ===========================
+   BOTÓN OTRAS EDICIONES
+=========================== */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-otras {
+  padding: 12px 18px;
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-otras:hover {
+  background: #005fcc;
+}
+
+/* ===========================
+   BOTONES SECUNDARIOS
+=========================== */
+
+.acciones-secundarias {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.acciones-secundarias button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Botón atrás */
+.btn-atras {
+  background: #444;
+  color: #fff;
+}
+
+.btn-atras:hover {
+  background: #333;
+}
+
+/* Botón editar */
+.btn-editar {
+  background: #6c5ce7;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background: #5848d6;
+}
+
+/* Botón eliminar */
+.acciones-secundarias .btn-eliminar {
+  background: #d63031;
+  color: #fff;
+   width: auto;
+  align-self: center;
+  font-size: 0.8rem;   /* más pequeño */
+  padding: 6px 10px;   /* más compacto */
+  margin-top: 29px;     /* separación extra */
+}
+
+.acciones-secundarias .btn-eliminar:hover {
+  background: #b02525;
+
+}
+
+
+.btn-saga {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #6c5ce7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-saga:hover {
+  background: #5a4bd1;
+}
+
+
+.footer button {
+  display: block;
+  margin: 10px auto;
+}
+
+.footer .oculto {
+  display: none;
+}
+
+

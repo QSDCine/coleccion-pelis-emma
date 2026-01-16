@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>La colección de pelis de Dan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f5f5f5">
+</head>
+<body>
+  <header class="header">
+    <h1 class="app-title">La colección de pelis de Dan</h1>
+
+  </header>
+
+  <main class="main">
+    <section class="intro">
+      <p>Bienvenido a tu catálogo personal de películas.</p>
+    </section>
+
+    <section class="actions">
+      <button id="btn-catalog" class="btn-primary" type="button">
+        Ver catálogo
+      </button>
+
+      <button id="btn-add" class="btn-secondary" type="button">
+        Añadir nueva película
+      </button>
+    </section>
+  </main>
+ <button id="toggle-theme" class="btn-theme" type="button">🌙</button>
+
+  <script type="module" src="js/firebase.js"></script>
+
+  <script src="js/index.js"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js")
+    .catch(err => console.error("SW error:", err));
+}
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

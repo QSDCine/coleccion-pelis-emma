@@ -1,0 +1,73 @@
+/* ===========================
+   MODO OSCURO GLOBAL
+=========================== */
+
+body.oscuro {
+  background: #111;
+  color: #fff;
+}
+
+/* Enlaces, textos y elementos generales */
+body.oscuro a,
+body.oscuro p,
+body.oscuro span,
+body.oscuro h1,
+body.oscuro h2,
+body.oscuro h3,
+body.oscuro h4,
+body.oscuro strong {
+  color: #fff;
+}
+
+/* Contenedores blancos típicos */
+body.oscuro .card,
+body.oscuro .pelicula-lista,
+body.oscuro .pelicula-cuadricula,
+body.oscuro .movie-container,
+body.oscuro .datos,
+body.oscuro .acciones-header,
+body.oscuro .acciones-secundarias {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+/* Inputs y selects */
+body.oscuro input,
+body.oscuro select,
+body.oscuro textarea {
+  background: #222;
+  color: #eee;
+  border-color: #444;
+}
+
+/* Botones genéricos */
+body.oscuro button {
+  background: #333;
+  color: #eee;
+  border-color: #444;
+}
+
+body.oscuro button:hover {
+  background: #444;
+}
+
+/* Secciones del catálogo */
+body.oscuro .busqueda,
+body.oscuro .filtros,
+body.oscuro .filtro {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+body.oscuro input::placeholder {
+  color: #bbb;
+}
+
+body.oscuro .btn-saga {
+  background: #4b3bbd;
+  color: #fff;
+}
+
+body.oscuro .btn-saga:hover {
+  background: #3d2fa3;
+}

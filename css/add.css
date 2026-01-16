@@ -1,0 +1,106 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header {
+  background: #222;
+  color: #fff;
+  padding: 20px 15px;
+  text-align: center;
+}
+
+.add-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* ===========================
+   CONTENEDOR DEL FORMULARIO
+=========================== */
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===========================
+   CAMPOS DEL FORMULARIO
+=========================== */
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.campo label {
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ===========================
+   GRUPO DE SAGA
+=========================== */
+
+.grupo-saga {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  margin-bottom: 15px;
+}
+
+/* ===========================
+   BOTÓN GUARDAR
+=========================== */
+
+.btn-guardar {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-guardar:hover {
+  background: #005fcc;
+}
