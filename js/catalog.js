@@ -143,6 +143,7 @@ inputBusqueda.addEventListener("input", aplicarFiltros);
 function normalizar(texto) {
   return texto
     .toLowerCase()
+    .replace(/&/g, "n")               // & → n
     .normalize("NFD")                 // separa acentos
     .replace(/[\u0300-\u036f]/g, "")  // elimina acentos
     .replace(/[^a-z0-9 ]/g, "")       // elimina símbolos (& / - ' etc.)
@@ -363,6 +364,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 
 
 });
+
 
 
 
