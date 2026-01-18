@@ -59,7 +59,7 @@ selectEsParteSaga.addEventListener("change", () => {
     e.preventDefault();
 
     if (!form.checkValidity()) {
-      alert("Por favor, completa todos los campos obligatorios.");
+      mostrarToast("Por favor, completa todos los campos obligatorios.");
       return;
     }
 
@@ -98,14 +98,21 @@ const saga = {
 
     try {
       const ref = await addDoc(collection(db, "peliculas"), nuevaPelicula);
-      alert("Película añadida correctamente.");
+      mostrarToast("Película añadida correctamente.");
       window.location.href = `movie.html?id=${ref.id}`;
     } catch (error) {
       console.error("Error al guardar:", error);
-      alert("Error al guardar la película.");
+      mostrarToast("Error al guardar la película.");
     }
   });
+function mostrarToast(mensaje) {
+  const toast = document.getElementById("toast");
+  toast.textContent = mensaje;
+  toast.classList.add("mostrar");
 
+  setTimeout(() => {
+    toast.classList.remove("mostrar");
+  }, 2500);
+}
 
 });
-
