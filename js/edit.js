@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const idPelicula = params.get("id");
 
   if (!idPelicula) {
-    alert("No se ha especificado ninguna película para editar.");
+    mostrarToast("No se ha especificado ninguna película para editar.");
     return;
   }
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const snap = await getDoc(ref);
 
   if (!snap.exists()) {
-    alert("Película no encontrada.");
+    mostrarToast("Película no encontrada.");
     window.location.href = "catalog.html";
     return;
   }
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     e.preventDefault();
 
     if (!form.checkValidity()) {
-      alert("Por favor, completa todos los campos obligatorios.");
+      mostrarToast("Por favor, completa todos los campos obligatorios.");
       return;
     }
 
@@ -148,9 +148,17 @@ const saga = {
       portada: portadaFinal
     });
 
-    alert("Cambios guardados correctamente.");
+    mostrarToast("Cambios guardados correctamente.");
     window.location.href = `movie.html?id=${idPelicula}`;
   });
 
+function mostrarToast(mensaje) {
+  const toast = document.getElementById("toast");
+  toast.textContent = mensaje;
+  toast.classList.add("mostrar");
 
+  setTimeout(() => {
+    toast.classList.remove("mostrar");
+  }, 2500);
+}
 });
