@@ -1,3 +1,10 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 /* ===========================
    ESTILOS GENERALES
 =========================== */
@@ -200,3 +207,4 @@ header.header {
 .btn-mini:hover {
   opacity: 0.8;
 }
+
