@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>La colección de pelis de Emma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/index.css?v=2">
   <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#f5f5f5">
 </head>
@@ -28,12 +28,13 @@
         Añadir nueva película
       </button>
     </section>
+    <button id="btn-random" class="btn-mini">¿Qué vemos hoy?</button>
   </main>
  <button id="toggle-theme" class="btn-theme" type="button">🌙</button>
 
   <script type="module" src="js/firebase.js"></script>
 
-  <script src="js/index.js"></script>
+  <script type="module" src="js/index.js"></script>>
   <script>
   if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js")
@@ -43,6 +44,7 @@
 </body>
 
 </html>
+
 
 
 
