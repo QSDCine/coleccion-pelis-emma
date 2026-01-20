@@ -126,25 +126,45 @@ body.oscuro .btn-theme {
 =========================== */
 
 .btn-theme {
-  display: block;
-  margin: 30px auto 20px auto; /* separación del contenido */
-  padding: 6px 10px;
-  font-size: 1.2rem; /* tamaño del icono */
+  position: fixed;
+  bottom: 20px;          /* siempre visible */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 42px;
   background: #444;
   color: #fff;
   border: none;
-  border-radius: 20%;
-  width: 42px;
-  height: 42px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;          /* por si acaso */
 }
-
 .btn-theme:hover {
   background: #555;
 }
 
-/* Modo oscuro */
 body.oscuro .btn-theme {
   background: #222;
+}
+
+.btn-mini {
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  background: #9b5de5;   /* morado elegante */
+  color: #fff;
+  margin: 20px auto;     /* centrado y con aire */
+  display: block;        /* para que respete el centrado */
+  max-width: 300px;      /* igual que los otros botones */
+}
+.btn-mini:hover {
+  background: #7a3fcf;   /* morado más oscuro al pasar el ratón */
 }
