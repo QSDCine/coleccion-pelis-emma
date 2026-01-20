@@ -19,6 +19,7 @@ body {
   color: #fff;
   padding: 20px 15px;
   text-align: center;
+  position: relative;
 }
 
 .movie-title {
@@ -31,7 +32,7 @@ body {
 =========================== */
 
 .movie-container {
-  padding: 20px;
+  padding: 5px 20px 1px 20px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -79,7 +80,7 @@ body {
 
 .footer {
   text-align: center;
-  padding: 20px;
+  padding: 1px 20px 1px 20px;
 }
 
 .btn-otras {
@@ -102,7 +103,7 @@ body {
 =========================== */
 
 .acciones-secundarias {
-  margin-top: 25px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -183,4 +184,26 @@ body {
   display: none;
 }
 
+.btn-volver {
+  position: absolute;
+  left: 10px;
+  top: 75%;
+  transform: translateY(-50%);
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
 
+.btn-volver:hover {
+  background: #333;
+}
+
+/* Ajuste para modo oscuro */
+body.oscuro .btn-volver {
+  background: #222;
+}
