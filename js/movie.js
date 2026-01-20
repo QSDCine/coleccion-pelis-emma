@@ -117,9 +117,12 @@ if (
       alert("Error al eliminar la película.");
     }
   });
-
+document.getElementById("btn-volver-top").addEventListener("click", () => {
+  window.location.href = "catalog.html";
+});
 
 });
+
 
 
 
