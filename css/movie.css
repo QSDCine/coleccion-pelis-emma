@@ -186,9 +186,8 @@ body {
 
 .btn-volver {
   position: absolute;
-  left: 10px;
-  top: 75%;
-  transform: translateY(-50%);
+  left: 7px;
+  bottom: -31px; 
   background: #444;
   color: #fff;
   border: none;
@@ -207,3 +206,4 @@ body {
 body.oscuro .btn-volver {
   background: #222;
 }
+
