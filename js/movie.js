@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const sagaSpan = document.getElementById("saga");
   sagaSpan.textContent = pelicula.saga.esParte ?
-     `Película ${pelicula.saga.numero} de ${pelicula.saga.totalsaga}`
+     `Película ${pelicula.saga.numero} de ${pelicula.saga.totalsaga} de ${pelicula.saga.nombre}`
     : "No pertenece a ninguna saga";
 
   document.getElementById("notas").textContent = pelicula.notas;
@@ -122,6 +122,7 @@ document.getElementById("btn-volver-top").addEventListener("click", () => {
 });
 
 });
+
 
 
 
