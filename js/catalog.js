@@ -349,7 +349,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   filtroFormato.value = "";
   filtroDirector.value = "";
   filtroAño.value = "";
-  ordenarPor.value = "titulo";
+  ordenarPor.value = "";
 
   // Restaurar catálogo completo
   peliculasFiltradas = [...peliculas];
@@ -364,6 +364,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 
 
 });
+
 
 
 
