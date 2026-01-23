@@ -44,7 +44,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   const portada = document.getElementById("portada");
   portada.src = pelicula.portada;
   portada.alt = pelicula.titulo;
+// ===========================
+// LIGHTBOX PARA AMPLIAR PORTADA
+// ===========================
 
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+portada.addEventListener("click", () => {
+  lightboxImg.src = portada.src;
+  lightbox.classList.add("visible");
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("visible");
+});
+
+// ===========================
+// FIN DEL LIGHTBOX Y CONTINUA EL RELLENO DE PÄGINA
+// ===========================
   document.getElementById("año").textContent = pelicula.año;
   document.getElementById("director").textContent = pelicula.director.join(", ");
   document.getElementById("generos").textContent = pelicula.generos.join(", ");
@@ -71,6 +89,8 @@ if (
 ) {
   btnSaga.classList.remove("oculto"); // mostrar
   btnSaga.addEventListener("click", () => {
+    // Guardar saga temporalmente mientras navegas
+    sessionStorage.setItem("catalogo_saga", pelicula.saga.nombre);
     window.location.href =
       `catalog.html?saga=${encodeURIComponent(pelicula.saga.nombre)}`;
   });
@@ -122,6 +142,7 @@ document.getElementById("btn-volver-top").addEventListener("click", () => {
 });
 
 });
+
 
 
 
