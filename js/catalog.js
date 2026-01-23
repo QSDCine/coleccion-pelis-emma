@@ -7,10 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // VARIABLES GLOBALES
   // ============================================================
 
-  let peliculas = [];          // Películas reales desde Firestore
-  let peliculasFiltradas = []; // Resultado tras filtros/búsqueda/ordenación
- 
-
+  let peliculas = [];
+  let peliculasFiltradas = [];
 
   const catalogo = document.getElementById("catalogo");
   const inputBusqueda = document.getElementById("input-busqueda");
@@ -24,29 +22,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const contadorPeliculas = document.getElementById("contador-peliculas");
   const btnCambiarVista = document.getElementById("btn-cambiar-vista");
 
-  let vistaActual = "lista"; // "lista" o "cuadricula"
-
+  let vistaActual = "lista";
 
   // ============================================================
-  // MODO OSCURO (persistente)
+  // MODO OSCURO
   // ============================================================
 
   const temaGuardado = localStorage.getItem("tema");
   if (temaGuardado === "oscuro") {
     document.body.classList.add("oscuro");
   }
-  
-// ============================================================
-// LECTURA DE PARÁMETRO "titulo" DESDE LA URL
-// ============================================================
-const params = new URLSearchParams(window.location.search);
-const tituloBuscado = params.get("titulo");
+
+  // ============================================================
+  // PARÁMETROS DE URL
+  // ============================================================
+
+  const params = new URLSearchParams(window.location.search);
+  const tituloBuscado = params.get("titulo");
   const sagaBuscada = params.get("saga");
   const edicionExacta = params.get("edicionExacta");
 
-if (tituloBuscado) {
-  inputBusqueda.value = tituloBuscado;
-}
+  if (tituloBuscado) {
+    inputBusqueda.value = tituloBuscado;
+  }
 
   // ============================================================
   // CARGA REAL DESDE FIRESTORE
@@ -64,34 +62,88 @@ if (tituloBuscado) {
       peliculasFiltradas = [...peliculas];
 
       rellenarFiltros();
-      
-      // Si venimos desde movie.html con ?edicionExacta=...
-if (edicionExacta) {
-  peliculasFiltradas = peliculas.filter(
-    p => p.titulo === edicionExacta
-  );
 
-  renderizarCatalogo();
-  return;
-}
-      
-// Si venimos desde movie.html con ?saga=...
-if (sagaBuscada) {
-  peliculasFiltradas = peliculas
-    .filter(p => p.saga.esParte && p.saga.nombre === sagaBuscada)
-    .sort((a, b) => a.saga.numero - b.saga.numero);
+      // ============================================================
+      // RESTAURAR ESTADO DESDE LOCALSTORAGE
+      // ============================================================
 
-  renderizarCatalogo();
-  return; // importante: no seguir con el flujo normal
-}
-      
-// Si venimos desde movie.html con ?titulo=...
-if (tituloBuscado) {
-  aplicarFiltros(); // esto ejecuta la búsqueda automáticamente
-} else {
-  renderizarCatalogo();
-}
+      const busquedaGuardada = localStorage.getItem("catalogo_busqueda");
+      if (busquedaGuardada) inputBusqueda.value = busquedaGuardada;
 
+      const generoGuardado = localStorage.getItem("catalogo_genero");
+      if (generoGuardado) filtroGenero.value = generoGuardado;
+
+      const formatoGuardado = localStorage.getItem("catalogo_formato");
+      if (formatoGuardado) filtroFormato.value = formatoGuardado;
+
+      const directorGuardado = localStorage.getItem("catalogo_director");
+      if (directorGuardado) filtroDirector.value = directorGuardado;
+
+      const añoGuardado = localStorage.getItem("catalogo_año");
+      if (añoGuardado) filtroAño.value = añoGuardado;
+
+      const ordenGuardado = localStorage.getItem("catalogo_orden");
+      if (ordenGuardado) ordenarPor.value = ordenGuardado;
+
+      // ============================================================
+      // RESTAURAR VISTA
+      // ============================================================
+
+      const vistaGuardada = localStorage.getItem("catalogo_vista");
+      if (vistaGuardada) {
+        vistaActual = vistaGuardada;
+        catalogo.classList.toggle("vista-cuadricula", vistaActual === "cuadricula");
+        catalogo.classList.toggle("vista-lista", vistaActual === "lista");
+      }
+
+      // ============================================================
+      // SAGA TEMPORAL (sessionStorage)
+      // ============================================================
+
+      const sagaTemporal = sessionStorage.getItem("catalogo_saga");
+
+      if (sagaBuscada || sagaTemporal) {
+        const nombreSaga = sagaBuscada || sagaTemporal;
+
+        peliculasFiltradas = peliculas
+          .filter(p => p.saga.esParte && p.saga.nombre === nombreSaga)
+          .sort((a, b) => a.saga.numero - b.saga.numero);
+
+        renderizarCatalogo();
+        return;
+      }
+
+      // ============================================================
+      // SI HAY ESTADO GUARDADO, APLICARLO Y SALIR
+      // ============================================================
+
+      if (
+        busquedaGuardada ||
+        generoGuardado ||
+        formatoGuardado ||
+        directorGuardado ||
+        añoGuardado ||
+        ordenGuardado
+      ) {
+        aplicarFiltros();
+        return;
+      }
+
+      // ============================================================
+      // FLUJOS ESPECIALES DESDE movie.html
+      // ============================================================
+
+      if (edicionExacta) {
+        peliculasFiltradas = peliculas.filter(p => p.titulo === edicionExacta);
+        renderizarCatalogo();
+        return;
+      }
+
+      if (tituloBuscado) {
+        aplicarFiltros();
+      } else {
+        renderizarCatalogo();
+      }
 
     } catch (error) {
       console.error("Error al cargar películas:", error);
@@ -99,9 +151,8 @@ if (tituloBuscado) {
     }
   }
 
-
   // ============================================================
-  // RELLENAR FILTROS DINÁMICAMENTE
+  // RELLENAR FILTROS
   // ============================================================
 
   function rellenarFiltros() {
@@ -133,64 +184,76 @@ if (tituloBuscado) {
     });
   }
 
-
-// ============================================================
-// BÚSQUEDA
-// ============================================================
-
-inputBusqueda.addEventListener("input", aplicarFiltros);
-
-function normalizar(texto) {
-  return texto
-    .toLowerCase()
-    .replace(/&/g, "n")               // & → n
-    .normalize("NFD")                 // separa acentos
-    .replace(/[\u0300-\u036f]/g, "")  // elimina acentos
-    .replace(/[^a-z0-9 ]/g, "")       // elimina símbolos (& / - ' etc.)
-    .trim();
-}
-
-function coincideBusqueda(pelicula, texto) {
-  const tTitulo = normalizar(pelicula.titulo);
-  const tokens = normalizar(texto).split(" ").filter(t => t.length > 0);
-
-  // Cada palabra buscada debe aparecer en el título, en cualquier orden
-  return tokens.every(t => tTitulo.includes(t));
-}
-
-
   // ============================================================
-  // FILTROS
+  // GUARDAR ESTADO EN LOCALSTORAGE
   // ============================================================
 
+  inputBusqueda.addEventListener("input", () => {
+    localStorage.setItem("catalogo_busqueda", inputBusqueda.value);
+  });
+
+  filtroGenero.addEventListener("change", () => {
+    localStorage.setItem("catalogo_genero", filtroGenero.value);
+  });
+
+  filtroFormato.addEventListener("change", () => {
+    localStorage.setItem("catalogo_formato", filtroFormato.value);
+  });
+
+  filtroDirector.addEventListener("change", () => {
+    localStorage.setItem("catalogo_director", filtroDirector.value);
+  });
+
+  filtroAño.addEventListener("change", () => {
+    localStorage.setItem("catalogo_año", filtroAño.value);
+  });
+
+  ordenarPor.addEventListener("change", () => {
+    localStorage.setItem("catalogo_orden", ordenarPor.value);
+  });
+
+  // ============================================================
+  // BÚSQUEDA + FILTROS
+  // ============================================================
+
+  inputBusqueda.addEventListener("input", aplicarFiltros);
   filtroGenero.addEventListener("change", aplicarFiltros);
   filtroFormato.addEventListener("change", aplicarFiltros);
   filtroDirector.addEventListener("change", aplicarFiltros);
   filtroAño.addEventListener("change", aplicarFiltros);
   ordenarPor.addEventListener("change", aplicarFiltros);
 
+  function normalizar(texto) {
+    return texto
+      .toLowerCase()
+      .replace(/&/g, "n")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9 ]/g, "")
+      .trim();
+  }
+
+  function coincideBusqueda(pelicula, texto) {
+    const tTitulo = normalizar(pelicula.titulo);
+    const tokens = normalizar(texto).split(" ").filter(t => t.length > 0);
+    return tokens.every(t => tTitulo.includes(t));
+  }
+
   function aplicarFiltros() {
     const texto = inputBusqueda.value.trim().toLowerCase();
 
     peliculasFiltradas = peliculas.filter(p => {
-
       if (texto && !coincideBusqueda(p, texto)) return false;
-
       if (filtroGenero.value && !p.generos.includes(filtroGenero.value)) return false;
-
       if (filtroFormato.value && p.formato !== filtroFormato.value) return false;
-
       if (filtroDirector.value && !p.director.includes(filtroDirector.value)) return false;
-
       if (filtroAño.value && p.año.toString() !== filtroAño.value) return false;
-
       return true;
     });
 
     ordenarPeliculas();
     renderizarCatalogo();
   }
-
 
   // ============================================================
   // ORDENACIÓN
@@ -206,17 +269,16 @@ function coincideBusqueda(pelicula, texto) {
     });
   }
 
-
   // ============================================================
-  // RENDERIZADO DEL CATÁLOGO
+  // RENDERIZADO
   // ============================================================
 
   function renderizarCatalogo() {
     catalogo.innerHTML = "";
 
     peliculasFiltradas.forEach(p => {
-      const card = vistaActual === "lista" ?
-         crearCardLista(p)
+      const card = vistaActual === "lista"
+        ? crearCardLista(p)
         : crearCardCuadricula(p);
 
       catalogo.appendChild(card);
@@ -225,8 +287,6 @@ function coincideBusqueda(pelicula, texto) {
     contadorPeliculas.textContent = `Total: ${peliculasFiltradas.length} películas`;
   }
 
-
-  // --- Vista lista ---
   function crearCardLista(p) {
     const div = document.createElement("div");
     div.className = "pelicula-lista";
@@ -243,7 +303,6 @@ function coincideBusqueda(pelicula, texto) {
     return div;
   }
 
-  // --- Vista cuadrícula ---
   function crearCardCuadricula(p) {
     const div = document.createElement("div");
     div.className = "pelicula-cuadricula";
@@ -258,7 +317,6 @@ function coincideBusqueda(pelicula, texto) {
     return div;
   }
 
-
   // ============================================================
   // ABRIR DETALLE
   // ============================================================
@@ -267,94 +325,98 @@ function coincideBusqueda(pelicula, texto) {
     window.location.href = `movie.html?id=${id}`;
   }
 
-
   // ============================================================
-  // CAMBIO DE VISTA (lista/cuadrícula)
+  // CAMBIO DE VISTA
   // ============================================================
-btnCambiarVista.style.position = "fixed";
-btnCambiarVista.style.left = "calc(100% - 80px)";
-btnCambiarVista.style.top = "calc(100% - 80px)";
-  
-btnCambiarVista.addEventListener("click", () => {
-  if (movido) return; // si se arrastró, NO cambiar vista
 
-  vistaActual = vistaActual === "lista" ? "cuadricula" : "lista";
-
-  catalogo.classList.toggle("vista-lista");
-  catalogo.classList.toggle("vista-cuadricula");
-
-  renderizarCatalogo();
-});
-
-
- // ============================================================
-// BOTÓN FLOTANTE ARRASTRABLE (PC + MÓVIL)
-// ============================================================
-
-let movido = false;
-let arrastrando = false;
-let offsetX = 0;
-let offsetY = 0;
-
-function iniciarMovimiento(e) {
-  arrastrando = true;
-  movido = false;
-
-  const punto = e.touches ? e.touches[0] : e;
-
-  offsetX = punto.clientX - btnCambiarVista.offsetLeft;
-  offsetY = punto.clientY - btnCambiarVista.offsetTop;
-}
-
-function mover(e) {
-  if (!arrastrando) return;
-
-  const punto = e.touches ? e.touches[0] : e;
-
-  movido = true;
-
-  btnCambiarVista.style.left = `${punto.clientX - offsetX}px`;
-  btnCambiarVista.style.top = `${punto.clientY - offsetY}px`;
   btnCambiarVista.style.position = "fixed";
-}
+  btnCambiarVista.style.left = "calc(100% - 80px)";
+  btnCambiarVista.style.top = "calc(100% - 80px)";
 
-function terminarMovimiento() {
-  arrastrando = false;
-}
+  btnCambiarVista.addEventListener("click", () => {
+    if (movido) return;
 
-// Ratón
-btnCambiarVista.addEventListener("mousedown", iniciarMovimiento);
-document.addEventListener("mousemove", mover);
-document.addEventListener("mouseup", terminarMovimiento);
+    vistaActual = vistaActual === "lista" ? "cuadricula" : "lista";
+    localStorage.setItem("catalogo_vista", vistaActual);
 
-// Táctil
-btnCambiarVista.addEventListener("touchstart", iniciarMovimiento);
-document.addEventListener("touchmove", mover);
-document.addEventListener("touchend", terminarMovimiento);
+    catalogo.classList.toggle("vista-lista");
+    catalogo.classList.toggle("vista-cuadricula");
+
+    renderizarCatalogo();
+  });
 
   // ============================================================
-// BOTONES DEL HEADER
-// ============================================================
+  // BOTÓN FLOTANTE ARRASTRABLE
+  // ============================================================
 
-document.getElementById("btn-volver-index").addEventListener("click", () => {
-  window.location.href = "index.html";
-});
+  let movido = false;
+  let arrastrando = false;
+  let offsetX = 0;
+  let offsetY = 0;
 
-document.getElementById("btn-reset").addEventListener("click", () => {
-  // Limpiar búsqueda
-  inputBusqueda.value = "";
+  function iniciarMovimiento(e) {
+    arrastrando = true;
+    movido = false;
 
-  // Resetear selects
-  filtroGenero.value = "";
-  filtroFormato.value = "";
-  filtroDirector.value = "";
-  filtroAño.value = "";
-  ordenarPor.value = "";
+    const punto = e.touches ? e.touches[0] : e;
 
-  // Restaurar catálogo completo
-  peliculasFiltradas = [...peliculas];
-  renderizarCatalogo();
-});
+    offsetX = punto.clientX - btnCambiarVista.offsetLeft;
+    offsetY = punto.clientY - btnCambiarVista.offsetTop;
+  }
+
+  function mover(e) {
+    if (!arrastrando) return;
+
+    const punto = e.touches ? e.touches[0] : e;
+
+    movido = true;
+
+    btnCambiarVista.style.left = `${punto.clientX - offsetX}px`;
+    btnCambiarVista.style.top = `${punto.clientY - offsetY}px`;
+    btnCambiarVista.style.position = "fixed";
+  }
+
+  function terminarMovimiento() {
+    arrastrando = false;
+  }
+
+  btnCambiarVista.addEventListener("mousedown", iniciarMovimiento);
+  document.addEventListener("mousemove", mover);
+  document.addEventListener("mouseup", terminarMovimiento);
+
+  btnCambiarVista.addEventListener("touchstart", iniciarMovimiento);
+  document.addEventListener("touchmove", mover);
+  document.addEventListener("touchend", terminarMovimiento);
+
+  // ============================================================
+  // BOTONES DEL HEADER
+  // ============================================================
+
+  document.getElementById("btn-volver-index").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    inputBusqueda.value = "";
+    filtroGenero.value = "";
+    filtroFormato.value = "";
+    filtroDirector.value = "";
+    filtroAño.value = "";
+    ordenarPor.value = "";
+
+    localStorage.removeItem("catalogo_busqueda");
+    localStorage.removeItem("catalogo_genero");
+    localStorage.removeItem("catalogo_formato");
+    localStorage.removeItem("catalogo_director");
+    localStorage.removeItem("catalogo_año");
+    localStorage.removeItem("catalogo_orden");
+    localStorage.removeItem("catalogo_vista");
+
+    sessionStorage.removeItem("catalogo_saga");
+
+    peliculasFiltradas = [...peliculas];
+    renderizarCatalogo();
+  });
 
   // ============================================================
   // INICIO
@@ -362,15 +424,4 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 
   cargarPeliculas();
 
-
 });
-
-
-
-
-
-
-
-
-
-
