@@ -1,4 +1,4 @@
-const CACHE_NAME = "pelis-cache-v1";
+const CACHE_NAME = "pelis-cache-v4";
 
 const ASSETS = [
   "/",
@@ -23,11 +23,16 @@ const ASSETS = [
   "/js/tema.js",
   "/img/icon-192.png",
   "/img/icon-512.png",
-  "/img/default.jpg"
+  "/img/default.jpg",
+  "/login.html",
+  "/js/login.js",
+  "/js/auth-state.js",
+  "/css/login.css"
 ];
 
 // INSTALACIÓN
 self.addEventListener("install", event => {
+   self.skipWaiting(); // ← ACTIVA EL SW NUEVO AL INSTANTE
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
@@ -35,6 +40,7 @@ self.addEventListener("install", event => {
 
 // ACTIVACIÓN
 self.addEventListener("activate", event => {
+  self.clients.claim(); // ← EL SW NUEVO TOMA CONTROL SIN ESPERAR
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -52,6 +58,11 @@ self.addEventListener("fetch", event => {
 
   // No cachear Firestore
   if (req.url.includes("firestore.googleapis.com")) return;
+  // No cachear login.html
+  if (req.url.includes("login.html")) {
+    event.respondWith(fetch(req));
+    return;
+  }
 
   event.respondWith(
     caches.match(req).then(cached => {
