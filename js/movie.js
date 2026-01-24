@@ -142,10 +142,3 @@ document.getElementById("btn-volver-top").addEventListener("click", () => {
 });
 
 });
-
-
-
-
-
-
-
