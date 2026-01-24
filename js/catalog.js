@@ -277,8 +277,8 @@ document.addEventListener("DOMContentLoaded", () => {
     catalogo.innerHTML = "";
 
     peliculasFiltradas.forEach(p => {
-      const card = vistaActual === "lista"
-        ? crearCardLista(p)
+      const card = vistaActual === "lista" ?
+          crearCardLista(p)
         : crearCardCuadricula(p);
 
       catalogo.appendChild(card);
