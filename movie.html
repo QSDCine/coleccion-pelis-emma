@@ -64,24 +64,16 @@
     <!-- BOTONES SECUNDARIOS -->
 <div class="acciones-secundarias">
   <button id="btn-atras" class="btn-atras">← Volver al catálogo</button>
-  <button id="btn-editar" class="btn-editar">Editar</button>
-  <button id="btn-eliminar" class="btn-eliminar">Eliminar</button>
+  <button id="btn-editar" class="btn-editar solo-admin">Editar</button>
+  <button id="btn-eliminar" class="btn-eliminar solo-admin">Eliminar</button>
 </div>
 
   <script type="module" src="js/movie.js"></script>
   <script src="js/tema.js"></script>
-    <!-- LIGHTBOX PARA AMPLIAR PORTADA -->
+  <!-- LIGHTBOX PARA AMPLIAR PORTADA -->
 <div id="lightbox" class="lightbox">
   <img id="lightbox-img" class="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Portada ampliada">
 </div>
+<script type="module" src="js/auth-state.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
