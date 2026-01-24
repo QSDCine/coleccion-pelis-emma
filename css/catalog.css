@@ -110,6 +110,8 @@ header.header {
   height: 75px;
   object-fit: cover;
   border-radius: 4px;
+  image-rendering: auto;
+  filter: contrast(1.05);
 }
 
 .pelicula-lista .info {
@@ -151,6 +153,8 @@ header.header {
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+  image-rendering: auto;
+  filter: contrast(1.05);
 }
 
 .pelicula-cuadricula .titulo {
@@ -207,4 +211,3 @@ header.header {
 .btn-mini:hover {
   opacity: 0.8;
 }
-
