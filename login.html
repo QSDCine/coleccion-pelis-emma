@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/tema.css" />
+    </head>
+    <body>
+        <div class="login-container">
+            <h1>Log In:</h1>
+
+            <input id="email" type="email" placeholder="Email" autocomplete="off" />
+            <input id="password" type="password" placeholder="Contraseña" autocomplete="new-password" />
+
+            <button id="btn-login">Entrar</button>
+            <button id="btn-logout">Salir</button>
+        </div>
+
+        <div id="toast"></div>
+
+        <script type="module" src="js/firebase.js"></script>
+        <script type="module" src="js/login.js"></script>
+<script>
+  const temaGuardado = localStorage.getItem("tema");
+  if (temaGuardado === "oscuro") {
+    document.body.classList.add("oscuro");
+  }
+</script>
+    </body>
+
+</html>
