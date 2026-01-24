@@ -1,0 +1,151 @@
+/* ===========================
+   ESTILO GENERAL
+=========================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;   /* centrado horizontal */
+  align-items: flex-start;   /* arriba */
+  padding-top: 60px;         /* margen superior elegante */
+}
+
+/* ===========================
+   CONTENEDOR LOGIN
+=========================== */
+
+.login-container {
+  background: #c7e0ff;          /* azul suave */
+  padding: 40px 50px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  width: 330px;
+  text-align: center;
+  border: 1px solid #b5d2ff;    /* borde sutil */
+}
+
+.login-container h1 {
+  margin-bottom: 25px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #003366;               /* azul oscuro elegante */
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  border: 1px solid #aac4e6;
+  background: #ffffff;
+  color: #222;
+  font-size: 1rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-container input::placeholder {
+  color: #777;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: #4ea1ff;
+  box-shadow: 0 0 6px rgba(78,161,255,0.5);
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 6px;
+  background: #0077ff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.login-container button:hover {
+  background: #005fcc;
+}
+
+.login-container button:active {
+  transform: scale(0.97);
+}
+
+/* ===========================
+   TOAST
+=========================== */
+
+#toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+}
+
+#toast.mostrar {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===========================
+   MODO OSCURO PARA LOGIN
+=========================== */
+
+body.oscuro {
+  background: #111;
+  color: #eee;
+}
+
+body.oscuro .login-container {
+  background: #1a1a1a;
+  border-color: #333;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+
+body.oscuro .login-container h1 {
+  color: #fff;
+}
+
+body.oscuro .login-container input {
+  background: #222;
+  color: #eee;
+  border-color: #444;
+}
+
+body.oscuro .login-container input::placeholder {
+  color: #bbb;
+}
+
+body.oscuro .login-container button {
+  background: #333;
+  color: #eee;
+}
+
+body.oscuro .login-container button:hover {
+  background: #444;
+}
