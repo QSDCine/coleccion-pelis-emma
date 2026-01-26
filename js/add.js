@@ -82,7 +82,7 @@ const saga = {
   totalsaga: selectEsParteSaga.value === "true" ? Number(inputTotalSaga.value) : null
 };
 
-    const portadaFinal = inputPortada.value.trim() || "https://qsdcine.github.io/coleccion-pelis-dan/img/default.jpg";
+    const portadaFinal = inputPortada.value.trim() || "https://qsdcine.github.io/coleccion-pelis-emma/img/default.jpg";
 
     const nuevaPelicula = {
       titulo: inputTitulo.value.trim(),
@@ -116,3 +116,4 @@ function mostrarToast(mensaje) {
 }
 
 });
+
