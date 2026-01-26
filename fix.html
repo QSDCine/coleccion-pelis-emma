@@ -7,6 +7,11 @@
 <body>
   <h1>Actualizando portadas… mira la consola</h1>
 
+  <!-- Inicializa Firebase y Auth igual que tu app -->
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth-state.js"></script>
+
+  <!-- Script de actualización -->
   <script type="module">
     import { db } from "./js/firebase.js";
     import { collection, getDocs, updateDoc, doc } 
@@ -15,20 +20,24 @@
     const URL_ANTIGUA = "https://qsdcine.github.io/coleccion-pelis-dan/img/default.jpg";
     const URL_NUEVA   = "https://qsdcine.github.io/coleccion-pelis-emma/img/default.jpg";
 
-    const snap = await getDocs(collection(db, "peliculas"));
+    // Esperamos un poco a que auth-state.js termine de autenticar
+    setTimeout(async () => {
+      console.log("Iniciando actualización…");
 
-    let contador = 0;
+      const snap = await getDocs(collection(db, "peliculas"));
+      let contador = 0;
 
-    for (const d of snap.docs) {
-      const data = d.data();
-      if (data.portada === URL_ANTIGUA) {
-        await updateDoc(doc(db, "peliculas", d.id), { portada: URL_NUEVA });
-        console.log("Actualizada:", d.id);
-        contador++;
+      for (const d of snap.docs) {
+        const data = d.data();
+        if (data.portada === URL_ANTIGUA) {
+          await updateDoc(doc(db, "peliculas", d.id), { portada: URL_NUEVA });
+          console.log("Actualizada:", d.id);
+          contador++;
+        }
       }
-    }
 
-    console.log("Proceso terminado. Total actualizadas:", contador);
+      console.log("Proceso terminado. Total actualizadas:", contador);
+    }, 1000);
   </script>
 </body>
 </html>
