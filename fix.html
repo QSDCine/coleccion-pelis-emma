@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Fix Portadas</title>
+</head>
+<body>
+  <h1>Actualizando portadas… mira la consola</h1>
+
+  <script type="module">
+    import { db } from "./js/firebase.js";
+    import { collection, getDocs, updateDoc, doc } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const URL_ANTIGUA = "https://qsdcine.github.io/coleccion-pelis-dan/img/default.jpg";
+    const URL_NUEVA   = "https://qsdcine.github.io/coleccion-pelis-emma/img/default.jpg";
+
+    const snap = await getDocs(collection(db, "peliculas"));
+
+    let contador = 0;
+
+    for (const d of snap.docs) {
+      const data = d.data();
+      if (data.portada === URL_ANTIGUA) {
+        await updateDoc(doc(db, "peliculas", d.id), { portada: URL_NUEVA });
+        console.log("Actualizada:", d.id);
+        contador++;
+      }
+    }
+
+    console.log("Proceso terminado. Total actualizadas:", contador);
+  </script>
+</body>
+</html>
