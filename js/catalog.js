@@ -97,6 +97,42 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // ============================================================
+      // Edicion exacta
+      // ============================================================
+
+if (edicionExacta) {
+
+  // 1. Resetear búsqueda
+  inputBusqueda.value = "";
+  localStorage.removeItem("catalogo_busqueda");
+
+  // 2. Resetear selects
+  filtroGenero.value = "";
+  filtroFormato.value = "";
+  filtroDirector.value = "";
+  filtroAño.value = "";
+  ordenarPor.value = "";
+
+  localStorage.removeItem("catalogo_genero");
+  localStorage.removeItem("catalogo_formato");
+  localStorage.removeItem("catalogo_director");
+  localStorage.removeItem("catalogo_año");
+  localStorage.removeItem("catalogo_orden");
+
+  // 3. Resetear estado interno
+  peliculasFiltradas = [...peliculas];
+
+  // 4. Aplicar filtro exacto
+  peliculasFiltradas = peliculas.filter(p => p.titulo === edicionExacta);
+
+  // 5. Renderizar
+  renderizarCatalogo();
+  return;
+}
+
+
+      
+      // ============================================================
       // SAGA TEMPORAL (sessionStorage)
       // ============================================================
 
@@ -133,11 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // FLUJOS ESPECIALES DESDE movie.html
       // ============================================================
 
-      if (edicionExacta) {
-        peliculasFiltradas = peliculas.filter(p => p.titulo === edicionExacta);
-        renderizarCatalogo();
-        return;
-      }
+
 
       if (tituloBuscado) {
         aplicarFiltros();
@@ -393,6 +425,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================================
 
   document.getElementById("btn-volver-index").addEventListener("click", () => {
+
+      // Reset total del catálogo
+  localStorage.removeItem("catalogo_busqueda");
+  localStorage.removeItem("catalogo_genero");
+  localStorage.removeItem("catalogo_formato");
+  localStorage.removeItem("catalogo_director");
+  localStorage.removeItem("catalogo_año");
+  localStorage.removeItem("catalogo_orden");
+  localStorage.removeItem("catalogo_vista");
+
+  sessionStorage.removeItem("catalogo_saga");
+
+    
     window.location.href = "index.html";
   });
 
