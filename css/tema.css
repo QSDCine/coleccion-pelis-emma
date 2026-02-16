@@ -19,17 +19,36 @@ body.oscuro strong {
   color: #fff;
 }
 
-/* Contenedores blancos típicos */
 body.oscuro .card,
 body.oscuro .pelicula-lista,
 body.oscuro .pelicula-cuadricula,
 body.oscuro .movie-container,
 body.oscuro .datos,
 body.oscuro .acciones-header,
-body.oscuro .acciones-secundarias {
+body.oscuro .acciones-secundarias,
+body.oscuro .form-container {
   background: #222 !important;
   color: #fff !important;
 }
+/* Formularios en modo oscuro (add/edit) */
+body.oscuro .form-container form {
+  background: #222 !important;
+  border-color: #444 !important;
+  color: #fff !important;
+}
+
+/* Caja de saga en oscuro */
+body.oscuro .form-container .grupo-saga {
+  background: #1a1a1a !important;
+  border-color: #444 !important;
+}
+
+/* Labels y small para asegurar legibilidad */
+body.oscuro .form-container label,
+body.oscuro .form-container small {
+  color: #fff !important;
+}
+
 
 /* Inputs y selects */
 body.oscuro input,
